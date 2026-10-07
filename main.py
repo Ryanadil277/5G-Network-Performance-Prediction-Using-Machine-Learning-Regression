@@ -467,3 +467,100 @@ plt.title("Actual vs Predicted Latency - Lasso Regression")
 
 plt.tight_layout()
 plt.show()
+# ============================================================
+# 📡 5G NETWORK LATENCY PREDICTION - GRADIO APP
+# ============================================================
+#
+import gradio as gr
+import pandas as pd
+import numpy as np
+
+
+# ============================================================
+# 1. USE THE BEST TRAINED MODEL
+# ============================================================
+
+best_final_model = trained_models[best_model_name]
+
+print("=" * 60)
+print("📡 5G NETWORK LATENCY PREDICTION")
+print("=" * 60)
+
+print(f"🏆 Best Model: {best_model_name}")
+
+
+# ============================================================
+# 2. GET THE FEATURES USED BY THE MODEL
+# ============================================================
+
+feature_names = list(X_train.columns)
+
+print("\n📋 Features:")
+for i, feature in enumerate(feature_names, 1):
+    print(f"{i}. {feature}")
+
+
+# ============================================================
+# 3. PREDICTION FUNCTION
+# ============================================================
+
+def predict_latency(*values):
+
+    # Create DataFrame with the exact feature order
+    input_data = pd.DataFrame(
+        [values],
+        columns=feature_names
+    )
+
+    # Predict latency
+    prediction = best_final_model.predict(input_data)[0]
+
+    return f"{prediction:.2f} ms"
+
+
+# ============================================================
+# 4. CREATE INPUT BOXES
+# ============================================================
+
+inputs = []
+
+for feature in feature_names:
+
+    # Use median value from training data
+    default_value = float(X_train[feature].median())
+
+    inputs.append(
+        gr.Number(
+            value=default_value,
+            label=str(feature)
+        )
+    )
+
+
+# ============================================================
+# 5. CREATE GRADIO INTERFACE
+# ============================================================
+
+iface = gr.Interface(
+    fn=predict_latency,
+
+    inputs=inputs,
+
+    outputs=gr.Textbox(
+        label="📡 Predicted Latency"
+    ),
+
+    title="📡 5G Network Latency Prediction",
+
+    description=(
+        "Enter the 5G network measurements below "
+        "to predict network latency using the trained "
+        "machine learning model."
+    )
+)
+
+
+# ============================================================
+# 6. LAUNCH APPLICATION
+# ============================================================
+iface.launch(inline=True,share=False,inbrowser=False )
