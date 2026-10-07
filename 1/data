@@ -1,0 +1,16 @@
+"C:\Useimport pandas as pd
+
+# Load the 5G dataset
+df = pd.read_csv("data/5g_network_data.csv", encoding="ISO-8859-1")
+
+# Show basic information
+print("Dataset shape:", df.shape)
+
+print("\nColumns:")
+print(df.columns.tolist())
+
+print("\nFirst 5 rows:")
+print(df.head())
+
+print("\nDataset information:")
+print(df.info())rs\HP\Downloads\5g-network-data-analysis-and-connection-prediction.zip" 

@@ -1,0 +1,25 @@
+artifact_path: file:c:/Users/HP/Downloads/my project/ML_Regression_Project/mlruns/0/models/m-301aff8279e94093aaace511822fbb75/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.skops
+    predict_fn: predict
+    python_version: 3.14.7
+  sklearn:
+    code: null
+    pickled_model: model.skops
+    serialization_format: skops
+    sklearn_version: 1.9.1
+    skops_trusted_types:
+    - sklearn.tree._tree.Tree
+    - sklearn.utils._bunch.Bunch
+mlflow_version: 3.16.1
+model_id: m-301aff8279e94093aaace511822fbb75
+model_size_bytes: 10308
+model_uuid: m-301aff8279e94093aaace511822fbb75
+prompts: null
+run_id: 23108f9a761d4167aac40e2d3f5e79e3
+utc_time_created: '2026-10-06 06:38:23.284340'
